@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
+:root {
+  --navbar-color: #007377;
+}
+
+.navbar {
+  background-color: var(--navbar-color);
+}
+
+.trademark {
+  font-size: 8px;
+}
+
+.nav-link {
+  font-size: 20px;
+}
