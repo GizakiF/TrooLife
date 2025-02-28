@@ -59,23 +59,6 @@ video.home-video {
   text-align: justify;
 }
 
-.rounded-left {
-  border-radius: 300px 0 0 300px;
-}
-
-.rounded-right {
-  border-radius: 0 300px 300px 0;
-}
-
-.mw-custom {
-  max-width: 500px;
-}
-
-@media (max-width: 768px) {
-  .mw-custom {
-    padding: 10px;
-  }
-}
 /* NAVBAR */
 .navbar {
   background-color: var(--blue-green-color);
@@ -83,11 +66,12 @@ video.home-video {
 }
 
 /* TODO: Adjust the font size */
-.navbar-brand {
-  font-size: 26px;
+.navbar-brand > span,
+u {
+  font-size: 30px;
 }
 
-.trademark {
+.navbar-brand .trademark {
   font-size: 8px;
 }
 
