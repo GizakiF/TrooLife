@@ -1,101 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-:root {
-  --blue-green-color: #007377;
-  --primary-font: "Manrope", sans-serif;
-  --header-font: "Poppins", sans-serif;
-}
-
-/* DEFAULTS */
-/* body { */
-/*   margin: 0; */
-/* } */
-
-body p {
-  font-family: var(--primary-font);
-  font-size: 20px;
-}
-
-body h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--header-font);
-}
-
-/* TODO: make the hr darker */
-hr.header-underline {
-  border: 1px solid var(--blue-green-color);
-  width: 80px;
-  margin: 15px auto;
-}
-
-video.home-video {
-  width: 100%;
-}
-
-.topic-underline {
-  text-decoration: none;
-  position: relative;
-}
-
-.topic-underline::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 1px;
-  background-color: var(--blue-green-color);
-}
-
-.topic-underline-yellow::after {
-  background-color: #f6dba0;
-}
-
-.text-justify {
-  text-align: justify;
-}
-
-.rounded-left {
-  border-radius: 300px 0 0 300px;
-}
-
-.rounded-right {
-  border-radius: 0 300px 300px 0;
-}
-
-.mw-custom {
-  max-width: 500px;
-}
-
-@media (max-width: 768px) {
-  .mw-custom {
-    padding: 10px;
-  }
-}
-/* NAVBAR */
-.navbar {
-  background-color: var(--blue-green-color);
-  padding: 40px 50px;
-}
-
-/* TODO: Adjust the font size */
-.navbar-brand {
-  font-size: 26px;
-}
-
-.trademark {
-  font-size: 8px;
-}
-
-.nav-link {
-  font-size: 14px;
-  margin: 14px 8px;
-}
-
 /* TODO */
 #to-do {
   color: white;
@@ -106,5 +8,12 @@ video.home-video {
 #health-experts {
   color: black;
   background-color: white;
+  padding: 80px 0;
+}
+
+/* LIFELINE PROGRAM */
+#lifeline-program {
+  color: black;
+  background-color: #f6dba0;
   padding: 80px 0;
 }
