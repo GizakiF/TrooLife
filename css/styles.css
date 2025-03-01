@@ -21,13 +21,18 @@ body {
   /* FIX: margin right not working */
   .rounded-right {
     /* margin-right: 40px; */
+<<<<<<< HEAD
     width: 92%;
+=======
+    width: 97%;
+>>>>>>> f3e31dc (added buttons)
   }
   .rounded-left {
     margin-left: 40px;
   }
 }
 
+<<<<<<< HEAD
 /* BOTTOM NAV */
 .bottom-nav {
   background-color: var(--yellow-color);
@@ -37,6 +42,12 @@ body {
 .overlay-text {
   width: 45rem;
   margin-top: 200px;
+=======
+/* OVERLAY TEXT */
+.overlay-text {
+  width: 45rem;
+  margin-top: 100px;
+>>>>>>> f3e31dc (added buttons)
 }
 .overlay-text span {
   font-size: 50px;
@@ -47,6 +58,7 @@ body {
   text-decoration-color: #f6dba0;
 }
 
+<<<<<<< HEAD
 /* CUSTOM BUTTON */
 .custom-btn {
   display: inline-flex;
@@ -88,6 +100,8 @@ body {
 /*   background-color: #005a5e; */
 /* } */
 
+=======
+>>>>>>> f3e31dc (added buttons)
 /* TODO */
 #to-do {
   color: white;
