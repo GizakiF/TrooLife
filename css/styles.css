@@ -1,6 +1,7 @@
 /* DEFAULTS */
 body {
   background-color: var(--blue-green-color);
+  overflow-x: hidden;
 }
 .rounded-left {
   border-radius: 300px 0 0 300px;
