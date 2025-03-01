@@ -22,7 +22,7 @@
   </head>
   <body>
     <!-- navbar -->
-    <nav class="navbar navbar-expand-md">
+    <nav class="navbar navbar-expand-md fixed-top">
       <!-- toggler button -->
       <button
         class="navbar-toggler"
@@ -71,11 +71,31 @@
       </div>
     </nav>
 
+    <div class="bottom-nav container-fluid mt-5 p-5"></div>
+
     <!-- video -->
     <video autoplay loop muted class="home-video">
       <source src="assets/videos/home_video.mp4" type="video/mp4" />
     </video>
 
+    <!-- overlay text -->
+    <div
+      class="overlay-text position-absolute top-50 start-50 translate-middle text-white text-center"
+    >
+      <h1 class="fw-semibold">
+        <span>Tr<u>oo</u>Life </span>
+        is dedicated to enhancing the quality and longevity of lives.
+      </h1>
+      <br />
+
+      <!-- <a href="#" class="custom-btn"> -->
+      <!--   Find out why -->
+      <!--   <span class="icon-circle"> -->
+      <!--     <i class="fs-1 bi bi-chevron-right"></i> -->
+      <!--   </span> -->
+      <!-- </a> -->
+      <img src="assets/images/custom_button.svg" alt="" />
+    </div>
     <!-- our mission -->
     <div class="my-5 p-3 container text-center" id="mission">
       <h1 class="my-4 fw-semibold">Our Mission</h1>
@@ -198,6 +218,9 @@
           </p>
         </div>
       </div>
+    </div>
+    <div class="position-absolute start-50 translate-middle">
+      <img src="assets/images/custom_button_dark.svg" alt="" />
     </div>
 
     <!-- bs5 script -->

@@ -1,4 +1,7 @@
 /* DEFAULTS */
+body {
+  background-color: var(--blue-green-color);
+}
 .rounded-left {
   border-radius: 300px 0 0 300px;
 }
@@ -17,12 +20,73 @@
   }
   /* FIX: margin right not working */
   .rounded-right {
-    margin-right: 40px;
+    /* margin-right: 40px; */
+    width: 92%;
   }
   .rounded-left {
     margin-left: 40px;
   }
 }
+
+/* BOTTOM NAV */
+.bottom-nav {
+  background-color: var(--yellow-color);
+}
+
+/* OVERLAY TEXT */
+.overlay-text {
+  width: 45rem;
+  margin-top: 200px;
+}
+.overlay-text span {
+  font-size: 50px;
+}
+.overlay-text u {
+  font-size: 50px;
+  text-decoration: underline;
+  text-decoration-color: #f6dba0;
+}
+
+/* CUSTOM BUTTON */
+.custom-btn {
+  display: inline-flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+  color: #007377;
+  background-color: white;
+  padding: 5px 23px;
+  border-radius: 50px;
+  border: 1px solid white;
+}
+
+.icon-circle {
+  background-color: #007377;
+  color: white;
+  width: 25px;
+  height: 25px;
+  /* padding: 5px; */
+  /* border: 6px solid #007377; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.icon-circle .chevron-right {
+  font-size: 3px;
+  /* margin: 5px; */
+}
+
+/* .custom-btn:hover { */
+/*   background-color: #f8f9fa; */
+/* } */
+/**/
+/* .custom-btn:hover .icon-circle { */
+/*   background-color: #005a5e; */
+/* } */
 
 /* TODO */
 #to-do {
