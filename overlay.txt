@@ -1,0 +1,18 @@
+
+    <div
+      class="overlay-text position-absolute top-50 start-50 translate-middle text-white text-center"
+    >
+      <h1 class="fw-semibold">
+        <span>Tr<u>oo</u>Life </span>
+        is dedicated to enhancing the quality and longevity of lives.
+      </h1>
+      <br />
+
+      <!-- <a href="#" class="custom-btn"> -->
+      <!--   Find out why -->
+      <!--   <span class="icon-circle"> -->
+      <!--     <i class="fs-1 bi bi-chevron-right"></i> -->
+      <!--   </span> -->
+      <!-- </a> -->
+      <img class="btn" src="assets/images/custom_button.svg" alt="" />
+    </div>

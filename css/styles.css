@@ -1,6 +1,7 @@
 /* DEFAULTS */
 body {
   background-color: var(--blue-green-color);
+  overflow-x: hidden;
 }
 .rounded-left {
   border-radius: 300px 0 0 300px;
@@ -21,7 +22,6 @@ body {
   /* FIX: margin right not working */
   .rounded-right {
     /* margin-right: 40px; */
-    width: 92%;
     width: 97%;
   }
   .rounded-left {
@@ -34,6 +34,9 @@ body {
 /*   background-color: var(--yellow-color); */
 /* } */
 
+.home-banner {
+  padding: 0 !important;
+}
 /* INFO BAR */
 #info-bar {
   margin-top: 81px;
@@ -44,7 +47,6 @@ body {
 /* OVERLAY TEXT */
 .overlay-text {
   width: 45rem;
-  margin-top: 150px;
 }
 .overlay-text span {
   font-size: 50px;
@@ -138,8 +140,9 @@ body {
 
 .tlp .icon-container .inner-container {
   border: 1px solid #c4c4c4;
-  padding: 80px;
+  padding: 80px 0;
   border-radius: 20px;
+  display: block;
 }
 
 .tlp .icon-container h3 {
