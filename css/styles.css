@@ -1,4 +1,5 @@
 /* DEFAULTS */
+html,
 body {
   background-color: var(--blue-green-color);
   overflow-x: hidden;
@@ -19,11 +20,9 @@ body {
   .mw-custom {
     padding: 10px;
   }
-  /* FIX: margin right not working */
   .rounded-right {
     /* margin-right: 40px; */
-    width: 92%;
-    width: 97%;
+    width: 95%;
   }
   .rounded-left {
     margin-left: 40px;
@@ -45,11 +44,13 @@ body {
 /* OVERLAY TEXT */
 .overlay-text {
   width: 45rem;
-  margin-top: 150px;
 }
+
 .overlay-text span {
   font-size: 50px;
+  font-weight: 700;
 }
+
 .overlay-text u {
   font-size: 50px;
   text-decoration: underline;
@@ -89,6 +90,60 @@ body {
   /* margin: 5px; */
 }
 
+/* ######################## VIDEO AND OVERLAY TEXT ################################ */
+@media (max-width: 660px) {
+  div .overlay {
+    margin-top: 40px;
+    font-size: 4rem;
+    width: 90%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .button-custom {
+    margin-top: -150px;
+  }
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.home-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* OVERLAY TEXT */
+
+.overlay-text span {
+  font-size: 50px;
+}
+.overlay-text u {
+  font-size: 50px;
+  text-decoration: underline;
+  text-decoration-color: #f6dba0;
+}
 /* .custom-btn:hover { */
 /*   background-color: #f8f9fa; */
 /* } */

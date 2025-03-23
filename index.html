@@ -1,3 +1,4 @@
+<!-- TODO: add underline to the 'mission' or the active link -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -21,28 +22,215 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- <div id="info-bar" class="container-fluid"></div> -->
+    <!-- TODO: navbar -->
+    <!-- TODO: fix overlapping of elements when resized -->
+    <nav
+      class="position-relative navbar navbar-expand-xl navbar-dark fixed-top"
+      style="
+        position: fixed !important;
+        top: 0 !important;
+        width: 100% !important;
+        z-index: 1030 !important;
+      "
+    >
+      <div class="justify-content-start container-fluid px-xl-5 px-md-1 gap-3">
+        <!-- navbar toggle button -->
+        <button
+          class="navbar-toggler border border-0 ps-1 pe-1 ms-2 me-3"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#main-nav"
+        >
+          <!-- toggler icon -->
+          <div class="align-items-center">
+            <img class="menu-icon" src="assets/images/menu.svg" alt="" />
+          </div>
+          <!-- <span class="navbar-toggler-icon"></span> -->
+        </button>
 
-    <!-- video -->
-    <video autoplay loop muted class="home-video">
-      <source src="assets/videos/home_video.mp4" type="video/mp4" />
-    </video>
+        <!-- navbar brand, title -->
+        <a href="" class="navbar-brand"
+          ><img src="assets/images/troolife logo 1.svg" alt=""
+        /></a>
+
+        <!-- non collapsible elements -->
+        <div class="d-xl-none d-flex align-items-center order-xl-2 ms-auto">
+          <!-- cart item -->
+          <a href="" class="cart-image text-white nav-link mb-1"
+            ><img src="assets/images/cart.svg" alt=""
+          /></a>
+
+          <!-- languages dropdown -->
+          <div class="dropdown align-items-center">
+            <img src="assets/images/globe.svg" class="globe-image" alt="" />
+            <button
+              type="button"
+              class="btn ps-2 dropdown-toggle text-white"
+              data-bs-toggle="dropdown"
+            >
+              <span>English</span>
+              <!-- <i class="bi bi-chevron-down"></i> -->
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">English</a></li>
+              <li><a class="dropdown-item" href="#">中国</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- collapsible elements -->
+        <div
+          class="collapse navbar-collapse justify-content-end order-xl-1"
+          id="main-nav"
+        >
+          <ul class="navbar-nav">
+            <!-- left list -->
+            <div
+              class="left-list d-xl-flex align-items-center gap-3 me-xxl-3 me-lg-1"
+            >
+              <li class="nav-item">
+                <a href="" class="text-white nav-link navlink-underline"
+                  >Mission</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="" class="text-white nav-link">LifeLine</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="text-white nav-link">Nutrition</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="text-white nav-link">Free by Referral</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="text-white nav-link">Public Relations</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="text-white nav-link">Company</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="text-white nav-link">Management</a>
+              </li>
+            </div>
+
+            <!-- right list -->
+            <div
+              class="ms-xxl-5 ms-lg-2 right-list d-xl-flex align-items-center gap-xxl-3 gap-lg-2 gap-md-1"
+            >
+              <!-- cart item -->
+              <a
+                href=""
+                class="cart-image text-white nav-link mb-1 d-none d-xl-block"
+                ><img src="assets/images/cart.svg" alt=""
+              /></a>
+
+              <!-- vertical bar -->
+              <!-- TODO: make the vertical bar dissapear and wont take space once lg breakpoint is triggered; try d-lg-none -->
+              <span class="text-white d-none d-xl-block">|</span>
+
+              <!-- my office, user image -->
+              <a href="" class="user-image text-white nav-link"
+                ><img src="assets/images/user.svg" alt="" class="me-2" /><span
+                  >My Office</span
+                ></a
+              >
+
+              <!-- languages dropdown -->
+              <div class="dropdown align-items-center d-none d-xl-block">
+                <img src="assets/images/globe.svg" alt="" />
+                <button
+                  type="button"
+                  class="btn ps-2 dropdown-toggle text-white"
+                  data-bs-toggle="dropdown"
+                >
+                  <span>English</span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">English</a></li>
+                  <li><a class="dropdown-item" href="#">中国</a></li>
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- info bar -->
+    <div
+      class="info-bar container-fluid mt-3 pt-5 me-5"
+      style="margin-top: 30px !important"
+    >
+      <div
+        class="info-bar d-flex align-items-center justify-content-between py-2 px-4"
+      >
+        <!-- Left Side: Profile -->
+        <div class="d-flex align-items-center">
+          <img
+            src="assets/images/Ellipse.png"
+            alt=""
+            class="profile-pic me-3"
+          />
+          <span class="fw-bold" style="font-size: 14px">Amanda Jones</span>
+        </div>
+
+        <!-- Right Side: Icons -->
+        <div class="d-flex align-items-center gap-3">
+          <img class="call-image" src="assets/images/call.svg" alt="Call" />
+          <img
+            class="message-image"
+            src="assets/images/message.svg"
+            alt="Message"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- TODO: fix video size when on md devices -->
+    <!-- video and overlay text -->
+    <div class="video-container">
+      <video autoplay loop muted class="home-video">
+        <source src="assets/videos/home_video.mp4" type="video/mp4" />
+      </video>
+
+      <!-- TODO: fix the text when on md devices -->
+      <div class="overlay overlay-text">
+        <h1 class="">
+          <span>Tr<u>oo</u>Life </span>
+          <span>
+            is dedicated to enhancing the quality and longevity of lives.
+          </span>
+        </h1>
+        <br />
+
+        <img
+          class="btn button-custom"
+          src="assets/images/custom_button.svg"
+          alt=""
+        />
+      </div>
+
+      <div
+        class="position-absolute bottom-0 end-0 me-lg-4 me-md-2 mb-3 text-white btn"
+      >
+        <span>SOUND </span>
+        <span class="off-yellow-text">OFF</span>
+        <img class="mb-1 ms-1" src="assets/images/sound.svg" alt="" />
+      </div>
+    </div>
 
     <!-- our mission -->
     <div class="my-5 p-3 container text-center" id="mission">
       <h1 class="mt-4 mb-2 fw-semibold">Our Mission</h1>
-      <hr class="header-underline" />
-      <div class="row mb-3">
-        <div class="col-2"></div>
-        <div class="col-8">
+      <hr class="header-underline mx-auto" />
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
           <p class="fw-normal mt-3">
             Our TrooLife mission is to empower Members to make a true difference
-            in their own personal health, wellness and longevity. For them to
+            in their own personal health, wellness, and longevity. For them to
             enhance their own quality of life, and then to inspire a better
-            quality of life for their family, friends and associates.
+            quality of life for their family, friends, and associates.
           </p>
         </div>
-        <div class="col-2"></div>
       </div>
     </div>
 
