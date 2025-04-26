@@ -11,6 +11,7 @@ class User
     {
         $this->userId = $userId;
         $this->firstName = $firstName;
+        //TODO: add the other attributes here
     }
 
     public static function createTable(mysqli $conn): void
@@ -22,6 +23,7 @@ class User
             last_name varchar(255),
             username varchar(255) UNIQUE NOT NULL,
             email varchar(255) UNIQUE NOT NULL,
+            password varchar(255) NOT NULL,
             date_of_birth DATE,
             gender ENUM('male', 'female', 'undisclosed'),
             profile_image_path varchar(255),
