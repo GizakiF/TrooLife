@@ -1,0 +1,52 @@
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.register-here {
+  color: var(--blue-green-color);
+}
+
+/* ################# VIDEO */
+video {
+  z-index: 1;
+  object-fit: cover;
+}
+
+/* ################### QUOTES */
+.quotes-container {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  width: 300px;
+  z-index: 2;
+}
+
+.quote-card {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quote-text {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.quote-author {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: right;
+  margin-top: 0.5rem;
+}

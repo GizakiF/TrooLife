@@ -155,6 +155,7 @@ hr.header-underline {
 .info-bar .profile-pic {
   width: 45px;
   height: 45px;
+  border-radius: 250px;
 }
 
 .info-bar .call-image {
@@ -210,3 +211,9 @@ hr.header-underline {
 /*   font-size: 15px; */
 /*   margin: 14px 8px; */
 /* } */
+
+/* FIXME: TEMPORARY */
+.team-member {
+  border-color: var(--blue-green-color);
+  border-width: 5px;
+}

@@ -1,0 +1,8 @@
+.submit-button {
+  background-color: var(--blue-green-color) !important;
+  border-color: var(--blue-green-color) !important;
+}
+
+.info-bar-logout-button {
+  color: var(--blue-green-color);
+}

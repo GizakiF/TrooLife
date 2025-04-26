@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!-- TODO: add underline to the 'mission' or the active link -->
 <!doctype html>
 <html lang="en">
@@ -6,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/global_styles.css" />
+    <link rel="stylesheet" href="css/buttons.css" />
 
     <!-- bs5 css -->
     <link
@@ -19,142 +23,15 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
-    <title>Document</title>
+    <title>TrooLife</title>
   </head>
   <body>
     <!-- TODO: navbar -->
     <!-- TODO: fix overlapping of elements when resized -->
-    <nav
-      class="position-relative navbar navbar-expand-xl navbar-dark fixed-top"
-      style="
-        position: fixed !important;
-        top: 0 !important;
-        width: 100% !important;
-        z-index: 1030 !important;
-      "
-    >
-      <div class="justify-content-start container-fluid px-xl-5 px-md-1 gap-3">
-        <!-- navbar toggle button -->
-        <button
-          class="navbar-toggler border border-0 ps-1 pe-1 ms-2 me-3"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#main-nav"
-        >
-          <!-- toggler icon -->
-          <div class="align-items-center">
-            <img class="menu-icon" src="assets/images/menu.svg" alt="" />
-          </div>
-          <!-- <span class="navbar-toggler-icon"></span> -->
-        </button>
 
-        <!-- navbar brand, title -->
-        <a href="" class="navbar-brand"
-          ><img src="assets/images/troolife logo 1.svg" alt=""
-        /></a>
-
-        <!-- non collapsible elements -->
-        <div class="d-xl-none d-flex align-items-center order-xl-2 ms-auto">
-          <!-- cart item -->
-          <a href="" class="cart-image text-white nav-link mb-1"
-            ><img src="assets/images/cart.svg" alt=""
-          /></a>
-
-          <!-- languages dropdown -->
-          <div class="dropdown align-items-center">
-            <img src="assets/images/globe.svg" class="globe-image" alt="" />
-            <button
-              type="button"
-              class="btn ps-2 dropdown-toggle text-white"
-              data-bs-toggle="dropdown"
-            >
-              <span>English</span>
-              <!-- <i class="bi bi-chevron-down"></i> -->
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">English</a></li>
-              <li><a class="dropdown-item" href="#">中国</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- collapsible elements -->
-        <div
-          class="collapse navbar-collapse justify-content-end order-xl-1"
-          id="main-nav"
-        >
-          <ul class="navbar-nav">
-            <!-- left list -->
-            <div
-              class="left-list d-xl-flex align-items-center gap-3 me-xxl-3 me-lg-1"
-            >
-              <li class="nav-item">
-                <a href="" class="text-white nav-link navlink-underline"
-                  >Mission</a
-                >
-              </li>
-              <li class="nav-item">
-                <a href="" class="text-white nav-link">LifeLine</a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="text-white nav-link">Nutrition</a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="text-white nav-link">Free by Referral</a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="text-white nav-link">Public Relations</a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="text-white nav-link">Company</a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="text-white nav-link">Management</a>
-              </li>
-            </div>
-
-            <!-- right list -->
-            <div
-              class="ms-xxl-5 ms-lg-2 right-list d-xl-flex align-items-center gap-xxl-3 gap-lg-2 gap-md-1"
-            >
-              <!-- cart item -->
-              <a
-                href=""
-                class="cart-image text-white nav-link mb-1 d-none d-xl-block"
-                ><img src="assets/images/cart.svg" alt=""
-              /></a>
-
-              <!-- vertical bar -->
-              <!-- TODO: make the vertical bar dissapear and wont take space once lg breakpoint is triggered; try d-lg-none -->
-              <span class="text-white d-none d-xl-block">|</span>
-
-              <!-- my office, user image -->
-              <a href="" class="user-image text-white nav-link"
-                ><img src="assets/images/user.svg" alt="" class="me-2" /><span
-                  >My Office</span
-                ></a
-              >
-
-              <!-- languages dropdown -->
-              <div class="dropdown align-items-center d-none d-xl-block">
-                <img src="assets/images/globe.svg" alt="" />
-                <button
-                  type="button"
-                  class="btn ps-2 dropdown-toggle text-white"
-                  data-bs-toggle="dropdown"
-                >
-                  <span>English</span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">English</a></li>
-                  <li><a class="dropdown-item" href="#">中国</a></li>
-                </ul>
-              </div>
-            </div>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <!-- header -->
+    <?php require("./header.php")?>
+    <!-- end header -->
 
     <!-- info bar -->
     <div
@@ -165,17 +42,43 @@
         class="info-bar d-flex align-items-center justify-content-between py-2 px-4"
       >
         <!-- Left Side: Profile -->
-        <div class="d-flex align-items-center">
-          <img
-            src="assets/images/Ellipse.png"
-            alt=""
-            class="profile-pic me-3"
-          />
-          <span class="fw-bold" style="font-size: 14px">Amanda Jones</span>
-        </div>
 
-        <!-- Right Side: Icons -->
+        <?php if (isset($_SESSION['user'])): ?>
+        <div class="d-flex align-items-center">
+          <a href="#" style="text-decoration: none; color: inherit">
+            <img
+              src="<?= $_SESSION['user']['profile_picture'] ?>"
+              alt="Profile"
+              class="profile-pic me-3"
+            />
+            <span class="fw-bold" style="font-size: 14px">
+              <?= $_SESSION['user']['first_name'] . ' ' .
+              $_SESSION['user']['last_name'] ?>
+            </span>
+          </a>
+        </div>
+        <?php else: ?>
+        <div class="d-flex align-items-center">
+          <a
+            href="login_page.php"
+            style="text-decoration: none; color: inherit"
+          >
+            <img
+              src="./uploads/blank-profile-picture.png"
+              alt="Guest"
+              class="profile-pic me-3"
+            />
+            <span class="fw-bold" style="font-size: 14px">Guest User (Click to Login)</span>
+          </a>
+        </div>
+        <?php endif; ?>
+
+        <!-- Right Side: Icons and logout-->
         <div class="d-flex align-items-center gap-3">
+            <!-- TODO: soon enough move me to the header instead of here -->
+            <?php if (isset($_SESSION['user'])): ?>
+              <a class="info-bar-logout-button" href="logout.php">Logout</a>
+            <?php endif; ?>
           <img class="call-image" src="assets/images/call.svg" alt="Call" />
           <img
             class="message-image"
@@ -185,6 +88,7 @@
         </div>
       </div>
     </div>
+
     <!-- TODO: fix video size when on md devices -->
     <!-- video and overlay text -->
     <div class="video-container">
@@ -377,98 +281,9 @@
       </div>
     </div>
 
-    <footer class="footer">
-      <div id="footer-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 col-lg-6">
-              <img
-                class="logo-troo"
-                src="assets/images/troolife-logo.png"
-                id="footer-logo"
-              />
-            </div>
-            <div class="col-md-12 col-lg-6">
-              <div class="row">
-                <div class="col1 col-md-4">
-                  <div class="container">
-                    <ul class="footer-links">
-                      <li><a href="">Mission</a></li>
-                      <li><a href="">Lifeline</a></li>
-                      <li><a href="">Nutrition</a></li>
-                      <li><a href="">Free by Referral</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col2 col-md-4">
-                  <div class="container">
-                    <ul class="footer-links">
-                      <li><a href="">Public Relations</a></li>
-                      <li><a href="">Company</a></li>
-                      <li><a href="">Management</a></li>
-                      <li>
-                        <a href="" target="_blank" rel="noopener">Contact Us</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col 3 col-md-4">
-                  <div class="container">
-                    <div class="footer-links">
-                      <li><a href="">Let's Connect</a></li>
-                      <li class="weibo-text">
-                        <img
-                          class="weibo"
-                          src="assets/images/weibo.png"
-                          alt="weibo"
-                        /><a class="weibo-text" href="">Weibo</a>
-                      </li>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-socket">
-        <div class="container">
-          <div class="row flex-md-row flex-column-reverse flex-sm-row-reverse">
-            <div class="col-md-4 col-lg-4">
-              <div class="lc-block">
-                <p class="copyright-text">
-                  © 2025 TrooLife, LLC Irvine, California, USA
-                </p>
-              </div>
-            </div>
-            <div class="col-md-8 col-md-8">
-              <div
-                class="lc-block d-flex justify-content-center align-items-center"
-              >
-                <ul
-                  class="list-unstyled d-flex flex-md-row flex-column justify-content-md-end mb-0 gap-md-5"
-                >
-                  <li class="text-center">
-                    <a
-                      href="#"
-                      class="text-dark text-decoration-none fw-semibold hover-text-teal"
-                      >Privacy Policy</a
-                    >
-                  </li>
-                  <li class="text-center">
-                    <a
-                      href="#"
-                      class="text-dark text-decoration-none fw-semibold hover-text-teal"
-                      >Terms of Service</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <!-- footer  -->
+    <?php require("./footer.php")?>
+    <!--  end footer -->
 
     <!-- bs5 script -->
     <script
