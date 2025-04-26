@@ -1,5 +1,6 @@
 <?php
 session_start();
+$url = "http://localhost:8000/endpoints/authentication/login.php";
 $errors = $_SESSION['login_errors'] ?? [];
 unset($_SESSION['login_errors']);
 ?>
@@ -59,7 +60,7 @@ unset($_SESSION['login_errors']);
           </div>
           <?php endif; ?>
 
-          <form action="./login.php" method="post">
+          <form action="<?= $url ?>" method="post">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
               <input
