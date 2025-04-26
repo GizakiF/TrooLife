@@ -1,7 +1,7 @@
 <?php
 session_start();
-
-// if no users registered, uise this array as a default
+$conn = require('./endpoints/connection.php');
+$url = "http://localhost:8000/endpoints/authentication/login.php";
 $users = $_SESSION['users'] ?? [
     [
         "username" => "John",
@@ -52,10 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        print_r('this is running');
         if ($authenticatedUser) {
             $_SESSION['user'] = $authenticatedUser;
+            $_SESSION['user_loggedin'] = true;
 
-            header('Location: index.php');
+            header('Location: ../TrooLife/index.php');
             exit();
         } else {
             $errors[] = "Invalid email or password";
