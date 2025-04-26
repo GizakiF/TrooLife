@@ -1,7 +1,6 @@
 <?php
 
-
-require('./classes/user.php');
+require("./classes/user.php");
 require('./classes/role.php');
 require('./classes/permission.php');
 require('./classes/role_permission.php');
