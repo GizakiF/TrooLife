@@ -76,7 +76,7 @@ session_start();
         <!-- Right Side: Icons and logout-->
         <div class="d-flex align-items-center gap-3">
             <!-- TODO: soon enough move me to the header instead of here -->
-            <?php if (isset($_SESSION['user'])): ?>
+          <?php if (isset($_SESSION['user'])): ?>
               <a class="info-bar-logout-button" href="logout.php">Logout</a>
             <?php endif; ?>
           <img class="call-image" src="assets/images/call.svg" alt="Call" />
