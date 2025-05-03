@@ -55,18 +55,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['users'] = [];
     }
 
-    $stmt = $conn->prepare("INSERT INTO Users(first_name, last_name, username, 
-              email, date_of_birth, gender
-              profile_image_path, role_id, password)
-            VALUES (?????????)
-    ");
-    $stmt->bind_param("sssssssis", $fname, $lname, $username, $email, $birthday, $gender, $imagePath, 2, $password);
+    $stmt = $conn->prepare("INSERT INTO Users (
+    first_name, last_name, username,
+    email, date_of_birth, gender,
+    profile_image_path, role_id, password) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+
+    $roleId = 2;
+    $stmt->bind_param("sssssssis", $fname, $lname, $username, $email, $birthday, $gender, $imagePath, $roleId, $password);
     $stmt->execute();
 
     $_SESSION['users'][] = $newUser;
 
     //TODO: double check
-    // $_SESSION['user'] = $newUser;
+    $_SESSION['user'] = $newUser;
 
 } else {
     header("Location: register.php");

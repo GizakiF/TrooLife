@@ -44,7 +44,7 @@ if ($password !== $user['password']) {
     exit();
 }
 
-unset($user['password']);
+// unset($user['password']);
 
 echo json_encode(["success" => true, "message" => "Login successful", "user" => $user]);
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$user = $_SESSION['users'];
+$user = $_SESSION['user'];
 ?>
 
 <!doctype html>
@@ -43,7 +43,7 @@ $user = $_SESSION['users'];
               class="col-12 col-md-4 text-center p-4 border-end border-md-end-0 border-bottom border-md-bottom-0"
             >
               <img
-                src="<?= htmlspecialchars($user['profile_picture']) ?>"
+                src="<?= htmlspecialchars($user['profile_image_path']) ?>"
                 class="img-fluid rounded-circle mb-3 profile-image"
                 alt="Profile Picture"
               />
@@ -59,13 +59,13 @@ $user = $_SESSION['users'];
               <div class="row mb-3">
                 <div class="col-sm-4 fw-bold">First Name:</div>
                 <div class="col-sm-8">
-                  <?= htmlspecialchars($user['fname']) ?>
+                  <?= htmlspecialchars($user['first_name']) ?>
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-sm-4 fw-bold">Last Name:</div>
                 <div class="col-sm-8">
-                  <?= htmlspecialchars($user['lname']) ?>
+                  <?= htmlspecialchars($user['last_name']) ?>
                 </div>
               </div>
               <div class="row mb-3">

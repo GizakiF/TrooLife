@@ -91,6 +91,7 @@ session_start();
             <div class="mb-4">
               <label for="image" class="form-label">Profile Picture</label>
               <img id="profilePreview" class="profile-picture-preview" alt="Profile preview" />
+              <!-- FIXME: make sure it only accepts pngs jpgs -->
               <input type="file" class="form-control" id="image" name="image" accept="image/*" required onchange="previewImage(this)" />
               <small class="text-muted">Upload a clear photo of yourself (Max 2MB)</small>
             </div>
