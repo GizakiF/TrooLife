@@ -144,7 +144,7 @@ $user = $_SESSION['user'];
                   <div class="col-sm-8">
                     <div class="col-auto">
                       <input
-                        type="birthday"
+                        type="date"
                         class="form-control"
                         id="birthday"
                         value="<?= htmlspecialchars($user['date_of_birth']) ?>"
