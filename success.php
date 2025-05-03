@@ -2,6 +2,7 @@
 session_start();
 ?>
 <?php
+$conn = require('./endpoints/connection.php');
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $requiredFields = ['username', 'email', 'password', 'fname', 'lname', 'birthday', 'Gender'];
     foreach ($requiredFields as $field) {
@@ -49,9 +50,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
        "profile_picture" => $imagePath
     ];
 
+
     if (!isset($_SESSION['users'])) {
         $_SESSION['users'] = [];
     }
+
+    $stmt = $conn->prepare("INSERT INTO Users(first_name, last_name, username, 
+              email, date_of_birth, gender
+              profile_image_path, role_id, password)
+            VALUES (?????????)
+    ");
+    $stmt->bind_param("sssssssis", $fname, $lname, $username, $email, $birthday, $gender, $imagePath, 2, $password);
+    $stmt->execute();
 
     $_SESSION['users'][] = $newUser;
 

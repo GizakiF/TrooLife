@@ -7,6 +7,11 @@ body {
   transform: translateY(20%);
   z-index: 2;
 }
+@media (max-width: 768px) {
+  .profile-container {
+    transform: translateY(22%);
+  }
+}
 
 .profile-image {
   max-width: 200px;

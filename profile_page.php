@@ -48,14 +48,26 @@ $user = $_SESSION['users'];
                 alt="Profile Picture"
               />
               <h4><?= htmlspecialchars($user['first_name']) ?></h4>
-              <h5 class="text-muted">
-                <?= htmlspecialchars($user['last_name']) ?>
-              </h5>
+              <h5 class="text-muted"></h5>
+              <?= htmlspecialchars($user['last_name']) ?>
             </div>
 
             <!-- Right Column -->
             <div class="col-12 col-md-8 p-4">
               <h3 class="mb-4">Profile Information</h3>
+              <hr />
+              <div class="row mb-3">
+                <div class="col-sm-4 fw-bold">First Name:</div>
+                <div class="col-sm-8">
+                  <?= htmlspecialchars($user['fname']) ?>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-sm-4 fw-bold">Last Name:</div>
+                <div class="col-sm-8">
+                  <?= htmlspecialchars($user['lname']) ?>
+                </div>
+              </div>
               <div class="row mb-3">
                 <div class="col-sm-4 fw-bold">Username:</div>
                 <div class="col-sm-8">
