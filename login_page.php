@@ -1,6 +1,6 @@
 <?php
 session_start();
-$url = "http://localhost:8000/endpoints/authentication/login_service.php";
+$url = "http://localhost/mkdir/Troolife/endpoints/authentication/login_service.php";
 $errors = $_SESSION['login_errors'] ?? [];
 unset($_SESSION['login_errors']);
 ?>
