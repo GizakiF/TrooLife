@@ -47,7 +47,7 @@ session_start();
         <div class="d-flex align-items-center">
           <a href="#" style="text-decoration: none; color: inherit">
             <img
-              src="<?= $_SESSION['user']['profile_picture'] ?>"
+              src="<?= $_SESSION['user']['profile_image_path'] ?>"
               alt="Profile"
               class="profile-pic me-3"
             />
