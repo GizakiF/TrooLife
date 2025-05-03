@@ -45,7 +45,7 @@ session_start();
 
         <?php if (isset($_SESSION['user'])): ?>
         <div class="d-flex align-items-center">
-          <a href="#" style="text-decoration: none; color: inherit">
+          <a href="profile_page.php" style="text-decoration: none; color: inherit">
             <img
               src="<?= $_SESSION['user']['profile_picture'] ?>"
               alt="Profile"
