@@ -20,7 +20,7 @@ if (!$email || !$password) {
     exit();
 }
 
-$sql = "SELECT * FROM users WHERE email = ?";
+$sql = "SELECT * FROM Users WHERE email = ?";
 
 $stmt = $conn->prepare($sql);
 

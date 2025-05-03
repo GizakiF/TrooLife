@@ -17,9 +17,9 @@ try {
     SET first_name = ?, last_name = ?,
     email = ?, username = ?,
     birthday = ?, gender = ?, password = ?
-    WHERE user_id = ?
+    WHERE user_id = ?;
     ");
-    $stmt->bind_param("sssssssi", $fname, $lname, $email, $username, $birthday, $gender, $password);
+    $stmt->bind_param("sssssssi", $fname, $lname, $email, $username, $birthday, $gender, $password, $userId);
     $stmt->execute();
 
 

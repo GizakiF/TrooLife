@@ -45,11 +45,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insert into DB
-    $sql = "INSERT INTO users (first_name, last_name, username, email, password, date_of_birth, gender, profile_image_path)
+    $sql = "INSERT INTO users (first_name, last_name, username, email, password, date_of_birth, gender, profile_image_path, role_id)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssss", $fname, $lname, $username, $email, $password, $birthday, $gender, $imagePath);
+    $roleId = 2;
+    $stmt->bind_param("ssssssss", $fname, $lname, $username, $email, $password, $birthday, $gender, $imagePath, $roleId);
 
     if ($stmt->execute()) {
         echo "Account created successfully!";
