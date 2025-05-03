@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $_SESSION['users'][] = $newUser;
 
-    // $_SESSION['user'] = $newUser;
+    $_SESSION['user'] = $newUser;
 
 } else {
     header("Location: register.php");

@@ -2,3 +2,13 @@ html,
 body {
   height: 100%;
 }
+
+.profile-container {
+  transform: translateY(20%);
+  z-index: 2;
+}
+
+.profile-image {
+  max-width: 200px;
+  height: auto;
+}
