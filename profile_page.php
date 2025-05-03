@@ -55,6 +55,10 @@ $user = $_SESSION['user'];
             <!-- Right Column -->
             <div class="col-12 col-md-8 p-4">
               <h3 class="mb-4">Profile Information</h3>
+              <a href="edit_profile_page.php"
+                >l<span class="glyphicon glyphicon-pencil"></span
+              ></a>
+
               <hr />
               <div class="row mb-3">
                 <div class="col-sm-4 fw-bold">First Name:</div>
@@ -80,12 +84,12 @@ $user = $_SESSION['user'];
                   <?= htmlspecialchars($user['email']) ?>
                 </div>
               </div>
-              <div class="row mb-3">
-                <div class="col-sm-4 fw-bold">Password:</div>
-                <div class="col-sm-8">
-                  <?= htmlspecialchars($user['password']) ?>
-                </div>
-              </div>
+              <!-- <div class="row mb-3"> -->
+              <!--   <div class="col-sm-4 fw-bold">Password:</div> -->
+              <!--   <div class="col-sm-8"> -->
+              <!--     <?= htmlspecialchars($user['password']) ?> -->
+              <!--   </div> -->
+              <!-- </div> -->
               <div class="row mb-3">
                 <div class="col-sm-4 fw-bold">Birthday:</div>
                 <div class="col-sm-8">
