@@ -39,6 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $imagePath = $targetPath;
         } else {
             echo "Failed to upload image.";
+
+
         }
     }
 
@@ -58,6 +60,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->close();
     $conn->close();
+    // Sanitize input
+    $username = htmlspecialchars($_POST['username']);
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+    $fname = htmlspecialchars($_POST['fname']);
+    $lname = htmlspecialchars($_POST['lname']);
+    $birthday = htmlspecialchars($_POST['birthday']);
+    $gender = htmlspecialchars($_POST['Gender']);
+
+    // Handle image upload
+    $uploadDir = 'uploads/';
+    if (!file_exists($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    $uniqueName = uniqid() . "_" . basename($_FILES['image']['name']);
+    $targetPath = $uploadDir . $uniqueName;
+
+    if (!move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+        die("Error uploading image.");
+    }
+
+    $imagePath = $targetPath;
+
+    $newUser = [
+       "username" => $username,
+       "email" => $email,
+       "password" => $password,
+       "first_name" => $fname,
+       "last_name" => $lname,
+       "date_of_birth" => $birthday,
+       "gender" => $gender,
+       "profile_picture" => $imagePath
+    ];
+
+
+    if (!isset($_SESSION['users'])) {
+        $_SESSION['users'] = [];
+    }
+
+    $stmt = $conn->prepare("INSERT INTO Users (
+    first_name, last_name, username,
+    email, date_of_birth, gender,
+    profile_image_path, role_id, password) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+
+    $roleId = 2;
+    $stmt->bind_param("sssssssis", $fname, $lname, $username, $email, $birthday, $gender, $imagePath, $roleId, $password);
+    $stmt->execute();
+
+    $_SESSION['users'][] = $newUser;
+
+    //TODO: double check
+    $_SESSION['user'] = $newUser;
+
+} else {
+    header("Location: register.php");
+    exit;
 }
 ?>
 
