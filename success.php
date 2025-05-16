@@ -4,12 +4,12 @@ session_start();
 <?php
 $conn = require('./endpoints/connection.php');
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $requiredFields = ['username', 'email', 'password', 'fname', 'lname', 'birthday', 'Gender'];
-    foreach ($requiredFields as $field) {
-        if (empty($_POST[$field])) {
-            die("Error: All fields are required.");
-        }
-    }
+    // $requiredFields = ['username', 'email', 'password', 'fname', 'lname', 'birthday', 'gender'];
+    // foreach ($requiredFields as $field) {
+    //     if (empty($_POST[$field])) {
+    //         die("Error: All fields are required.");
+    //     }
+    // }
 
     if (!isset($_FILES['image']) || $_FILES['image']['error'] !== 0) {
         die("Error: Profile picture is required.");
