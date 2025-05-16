@@ -4,12 +4,12 @@ session_start();
 <?php
 $conn = require('./endpoints/connection.php');
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // $requiredFields = ['username', 'email', 'password', 'fname', 'lname', 'birthday', 'gender'];
-    // foreach ($requiredFields as $field) {
-    //     if (empty($_POST[$field])) {
-    //         die("Error: All fields are required.");
-    //     }
-    // }
+    $requiredFields = ['username', 'email', 'password', 'fname', 'lname', 'birthday', 'gender'];
+    foreach ($requiredFields as $field) {
+        if (empty($_POST[$field])) {
+            die("Error: All fields are required.");
+        }
+    }
 
     if (!isset($_FILES['image']) || $_FILES['image']['error'] !== 0) {
         die("Error: Profile picture is required.");
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fname = htmlspecialchars($_POST['fname']);
     $lname = htmlspecialchars($_POST['lname']);
     $birthday = htmlspecialchars($_POST['birthday']);
-    $gender = htmlspecialchars($_POST['Gender']);
+    $gender = htmlspecialchars($_POST['gender']);
 
     // Handle image upload
     $uploadDir = 'uploads/';
@@ -55,14 +55,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['users'] = [];
     }
 
+    
     $stmt = $conn->prepare("INSERT INTO Users (
     first_name, last_name, username,
     email, date_of_birth, gender,
-    profile_image_path, role_id, password) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+    profile_image_path, role_id, password, date_created) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
     $roleId = 2;
-    $stmt->bind_param("sssssssis", $fname, $lname, $username, $email, $birthday, $gender, $imagePath, $roleId, $password);
+    $now = date("Y-m-d H:i:s");
+    $stmt->bind_param("sssssssiss", $fname, $lname, $username, $email, $birthday, $gender, $imagePath, $roleId, $password, $now);
     $stmt->execute();
 
     $_SESSION['users'][] = $newUser;
