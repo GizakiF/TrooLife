@@ -1,0 +1,17 @@
+/* ADMIN USER PANEL */
+.admin-user-panel {
+  background-color: blue;
+  height: 50px;
+}
+
+/* ADMIN NAVIGATION PANE */
+.admin-navigation-pane {
+  background-color: pink;
+  height: 100vh;
+}
+
+/* ADMIN DASHBOARD */
+.admin-dashboard {
+  background-color: yellow;
+  height: 100vh;
+}
