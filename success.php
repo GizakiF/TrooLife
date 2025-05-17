@@ -16,50 +16,50 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get and sanitize user input
-    $fname = mysqli_real_escape_string($conn, $_POST['fname']);
-    $lname = mysqli_real_escape_string($conn, $_POST['lname']);
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = $_POST['password'];
-    $birthday = $_POST['birthday'];
-    $gender = $_POST['Gender'];
+    // $fname = mysqli_real_escape_string($conn, $_POST['fname']);
+    // $lname = mysqli_real_escape_string($conn, $_POST['lname']);
+    // $username = mysqli_real_escape_string($conn, $_POST['username']);
+    // $email = mysqli_real_escape_string($conn, $_POST['email']);
+    // $password = $_POST['password'];
+    // $birthday = $_POST['birthday'];
+    // $gender = $_POST['Gender'];
 
     // Handle image upload
-    $imagePath = "";
-    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $uploadDir = "uploads/";
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
-        }
+    // $imagePath = "";
+    // if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+    //     $uploadDir = "uploads/";
+    //     if (!is_dir($uploadDir)) {
+    //         mkdir($uploadDir, 0755, true);
+    //     }
 
-        $imageName = uniqid() . "_" . basename($_FILES['image']['name']);
-        $targetPath = $uploadDir . $imageName;
+    //     $imageName = uniqid() . "_" . basename($_FILES['image']['name']);
+    //     $targetPath = $uploadDir . $imageName;
 
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
-            $imagePath = $targetPath;
-        } else {
-            echo "Failed to upload image.";
+    //     if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+    //         $imagePath = $targetPath;
+    //     } else {
+    //         echo "Failed to upload image.";
 
 
-        }
-    }
+    //     }
+    // }
 
     // Insert into DB
-    $sql = "INSERT INTO users (first_name, last_name, username, email, password, date_of_birth, gender, profile_image_path)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+   // $sql = "INSERT INTO users (first_name, last_name, username, email, password, date_of_birth, gender, profile_image_path)
+            //VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssss", $fname, $lname, $username, $email, $password, $birthday, $gender, $imagePath);
+   //$stmt = $conn->prepare($sql);
+    //$stmt->bind_param("ssssssss", $fname, $lname, $username, $email, $password, $birthday, $gender, $imagePath);
 
-    if ($stmt->execute()) {
-        echo "Account created successfully!";
-        // Redirect or show success message
-    } else {
-        echo "Error: " . $stmt->error;
-    }
+    // //if ($stmt->execute()) {
+    //     //echo "Account created successfully!";
+    //     // Redirect or show success message
+    // //} else {
+    //     echo "Error: " . $stmt->error;
+    // //}
 
-    $stmt->close();
-    $conn->close();
+    // $stmt->close();
+    // $conn->close();
     // Sanitize input
     $username = htmlspecialchars($_POST['username']);
     $email = htmlspecialchars($_POST['email']);
@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['users'] = [];
     }
 
-    $stmt = $conn->prepare("INSERT INTO Users (
+    $stmt = $conn->prepare("INSERT INTO users (
     first_name, last_name, username,
     email, date_of_birth, gender,
     profile_image_path, role_id, password) 

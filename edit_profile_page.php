@@ -28,6 +28,7 @@ $user = $_SESSION['user'];
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
     <link rel="stylesheet" href="css/profile_page.css" />
+    
   </head>
   <body class="d-flex flex-column min-vh-100">
     <!-- header -->
@@ -57,10 +58,6 @@ $user = $_SESSION['user'];
               <div class="col-12 col-md-8 p-4">
                 <!-- TODO: ADD the action -->
                 <h3 class="mb-4">Profile Information</h3>
-                <a href="#"
-                  >l<span class="glyphicon glyphicon-pencil"></span
-                ></a>
-
                 <hr />
                 <div class="row mb-3">
                   <div class="col-sm-4 fw-bold">First Name:</div>
@@ -144,7 +141,7 @@ $user = $_SESSION['user'];
                   <div class="col-sm-8">
                     <div class="col-auto">
                       <input
-                        type="birthday"
+                        type="date"
                         class="form-control"
                         id="birthday"
                         value="<?= htmlspecialchars($user['date_of_birth']) ?>"
