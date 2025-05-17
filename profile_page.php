@@ -28,6 +28,12 @@ $user = $_SESSION['user'];
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
     <link rel="stylesheet" href="css/profile_page.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+  />
+</head>
+
   </head>
   <body class="d-flex flex-column min-vh-100">
     <!-- header -->
@@ -54,10 +60,13 @@ $user = $_SESSION['user'];
 
             <!-- Right Column -->
             <div class="col-12 col-md-8 p-4">
-              <h3 class="mb-4">Profile Information</h3>
-              <a href="edit_profile_page.php"
-                >l<span class="glyphicon glyphicon-pencil"></span
-              ></a>
+              <h3 class="mb-4 d-flex justify-content-between">
+                Profile Information
+                <a href="edit_profile_page.php" class="ms-auto" style="color: black;">
+                <i class="fas fa-pencil-alt"></i>
+              </a>
+              </h3>
+
 
               <hr />
               <div class="row mb-3">

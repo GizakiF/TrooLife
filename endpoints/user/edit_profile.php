@@ -1,4 +1,7 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
 
 $conn = require('../connection.php');
 
@@ -13,7 +16,7 @@ $userId = $_SESSION['user']['user_id'] ?? null;
 
 try {
     $stmt = $conn->prepare("
-    UPDATE Users
+    UPDATE users
     SET first_name = ?, last_name = ?,
     email = ?, username = ?,
     date_of_birth = ?, gender = ?, password = ?
@@ -31,6 +34,10 @@ try {
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
     $_SESSION['user'] = $user;
+
+
+    header("Location: ../../profile_page.php");
+
 
 
 
