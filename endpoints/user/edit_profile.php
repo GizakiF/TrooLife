@@ -35,9 +35,12 @@ try {
     $user = $result->fetch_assoc();
     $_SESSION['user'] = $user;
 
+
     header("Location: ../../profile_page.php");
 
 
-} catch (Exception $e) {
 
+
+} catch (Exception $e) {
+    error_log("Update error: " . $e->getMessage());
 }

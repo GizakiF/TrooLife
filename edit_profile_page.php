@@ -162,6 +162,7 @@ $user = $_SESSION['user'];
                           id="male"
                           value="male"
                           required
+                          <?= $user['gender'] == 'male' ? 'checked' : '' ?>
                         />
                         <label class="form-check-label" for="male">Male</label>
                       </div>
@@ -173,6 +174,7 @@ $user = $_SESSION['user'];
                           id="female"
                           value="female"
                           required
+                          <?= $user['gender'] == 'female' ? 'checked' : '' ?>
                         />
                         <label class="form-check-label" for="female"
                           >Female</label
@@ -186,6 +188,7 @@ $user = $_SESSION['user'];
                           id="other"
                           value="prefer_not_to_say"
                           required
+                          <?= $user['gender'] == 'undisclosed' ? 'checked' : '' ?>
                         />
                         <label class="form-check-label" for="other"
                           >Prefer not to say</label
