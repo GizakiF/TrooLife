@@ -74,15 +74,15 @@ session_start();
               <label class="form-label">Gender</label>
               <div class="gender-options">
                 <div class="gender-option form-check">
-                  <input class="form-check-input" type="radio" name="Gender" id="male" value="male" required />
+                  <input class="form-check-input" type="radio" name="gender" id="male" value="male" required />
                   <label class="form-check-label" for="male">Male</label>
                 </div>
                 <div class="gender-option form-check">
-                  <input class="form-check-input" type="radio" name="Gender" id="female" value="female" required />
+                  <input class="form-check-input" type="radio" name="gender" id="female" value="female" required />
                   <label class="form-check-label" for="female">Female</label>
                 </div>
                 <div class="gender-option form-check">
-                  <input class="form-check-input" type="radio" name="Gender" id="other" value="prefer_not_to_say" required />
+                  <input class="form-check-input" type="radio" name="gender" id="other" value="undisclosed" required />
                   <label class="form-check-label" for="other">Prefer not to say</label>
                 </div>
               </div>

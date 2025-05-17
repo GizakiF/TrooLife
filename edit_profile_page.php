@@ -144,7 +144,7 @@ $user = $_SESSION['user'];
                   <div class="col-sm-8">
                     <div class="col-auto">
                       <input
-                        type="birthday"
+                        type="date"
                         class="form-control"
                         id="birthday"
                         value="<?= htmlspecialchars($user['date_of_birth']) ?>"
@@ -165,6 +165,7 @@ $user = $_SESSION['user'];
                           id="male"
                           value="male"
                           required
+                          <?= $user['gender'] == 'male' ? 'checked' : '' ?>
                         />
                         <label class="form-check-label" for="male">Male</label>
                       </div>
@@ -176,6 +177,7 @@ $user = $_SESSION['user'];
                           id="female"
                           value="female"
                           required
+                          <?= $user['gender'] == 'female' ? 'checked' : '' ?>
                         />
                         <label class="form-check-label" for="female"
                           >Female</label
@@ -189,6 +191,7 @@ $user = $_SESSION['user'];
                           id="other"
                           value="prefer_not_to_say"
                           required
+                          <?= $user['gender'] == 'undisclosed' ? 'checked' : '' ?>
                         />
                         <label class="form-check-label" for="other"
                           >Prefer not to say</label

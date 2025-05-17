@@ -1,46 +1,14 @@
 <?php
 session_start();
 
-// Database connection settings
-$servername = "localhost";
-$dbUsername = "root";       // Default XAMPP username
-$dbPassword = "";           // Default XAMPP password is blank
-$dbName = "troolifedb";        // Replace with your actual DB name
-
-$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get and sanitize user input
-    $fname = mysqli_real_escape_string($conn, $_POST['fname']);
-    $lname = mysqli_real_escape_string($conn, $_POST['lname']);
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = $_POST['password'];
-    $birthday = $_POST['birthday'];
-    $gender = $_POST['Gender'];
-
-    // Handle image upload
-    $imagePath = "";
-    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $uploadDir = "uploads/";
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
-        }
-
-        $imageName = uniqid() . "_" . basename($_FILES['image']['name']);
-        $targetPath = $uploadDir . $imageName;
-
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
-            $imagePath = $targetPath;
-        } else {
-            echo "Failed to upload image.";
-
-
+?>
+<?php
+$conn = require('./endpoints/connection.php');
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $requiredFields = ['username', 'email', 'password', 'fname', 'lname', 'birthday', 'gender'];
+    foreach ($requiredFields as $field) {
+        if (empty($_POST[$field])) {
+            die("Error: All fields are required.");
         }
     }
 
@@ -68,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fname = htmlspecialchars($_POST['fname']);
     $lname = htmlspecialchars($_POST['lname']);
     $birthday = htmlspecialchars($_POST['birthday']);
-    $gender = htmlspecialchars($_POST['Gender']);
+    $gender = htmlspecialchars($_POST['gender']);
 
     // Handle image upload
     $uploadDir = 'uploads/';
@@ -101,14 +69,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['users'] = [];
     }
 
+
     $stmt = $conn->prepare("INSERT INTO Users (
     first_name, last_name, username,
     email, date_of_birth, gender,
-    profile_image_path, role_id, password) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+    profile_image_path, role_id, password, date_created) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
     $roleId = 2;
-    $stmt->bind_param("sssssssis", $fname, $lname, $username, $email, $birthday, $gender, $imagePath, $roleId, $password);
+    $now = date("Y-m-d H:i:s");
+    $stmt->bind_param("sssssssiss", $fname, $lname, $username, $email, $birthday, $gender, $imagePath, $roleId, $password, $now);
     $stmt->execute();
 
     $_SESSION['users'][] = $newUser;
