@@ -1,17 +1,63 @@
+:root {
+  /* colors */
+  --blue-green-color: #007377;
+  --yellow-color: #f6dba0;
+  --navigation-panel-color: #000000;
+
+  /* fonts */
+  --primary-font: "Manrope", sans-serif;
+  --header-font: "Poppins", sans-serif;
+
+  /* breakpoints */
+  --sm: 576px;
+  --md: 768px;
+  --lg: 992px;
+  --xl: 1200px;
+  --xxl: 1400px;
+}
+
 /* ADMIN USER PANEL */
 .admin-user-panel {
-  background-color: blue;
+  background-color: var(--blue-green-color);
   height: 50px;
 }
 
 /* ADMIN NAVIGATION PANE */
 .admin-navigation-pane {
-  background-color: pink;
+  background-color: var(--navigation-panel-color);
+  color: white;
   height: 100vh;
+  bottom: 0;
 }
 
 /* ADMIN DASHBOARD */
 .admin-dashboard {
-  background-color: yellow;
+  background-color: white;
   height: 100vh;
+}
+
+.user-profile-image {
+  height: 60px;
+  width: 60px;
+  border-radius: 500px;
+}
+
+.username {
+  color: #8a8a8a;
+}
+
+/* USER TABLES */
+thead,
+tbody {
+  display: block;
+}
+
+tbody {
+  height: 650px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+td {
+  width: 1900px;
 }
