@@ -1,63 +1,141 @@
 :root {
   /* colors */
-  --blue-green-color: #007377;
-  --yellow-color: #f6dba0;
-  --navigation-panel-color: #000000;
+  --primary-color: #007377;
+  --secondary-color: #f8f9fc;
+  --text-color: #5a5c69;
+  --border-color: #e3e6f0;
+  --danger-color: #e74a3b;
 
   /* fonts */
-  --primary-font: "Manrope", sans-serif;
-  --header-font: "Poppins", sans-serif;
+  --primary-font: 'Poppins', sans-serif;
+}
 
-  /* breakpoints */
-  --sm: 576px;
-  --md: 768px;
-  --lg: 992px;
-  --xl: 1200px;
-  --xxl: 1400px;
+body {
+  font-family: var(--primary-font);
+  color: var(--text-color);
+  background-color: #f8f9fa;
 }
 
 /* ADMIN USER PANEL */
 .admin-user-panel {
-  background-color: var(--blue-green-color);
-  height: 50px;
+  background-color: transparent;
+  padding: 1rem 0;
 }
 
 /* ADMIN NAVIGATION PANE */
 .admin-navigation-pane {
-  background-color: var(--navigation-panel-color);
-  color: white;
+  background-color: white;
   height: 100vh;
-  bottom: 0;
+  border-right: 1px solid var(--border-color);
+}
+
+.admin-navigation-pane h2 {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.admin-navigation-pane .nav-link {
+  color: var(--text-color);
+  border-radius: 0.35rem;
+  padding: 0.5rem 1rem;
+}
+
+.admin-navigation-pane .nav-link.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.admin-navigation-pane .nav-link:hover:not(.active) {
+  background-color: var(--secondary-color);
 }
 
 /* ADMIN DASHBOARD */
 .admin-dashboard {
-  background-color: white;
+  background-color: #f8f9fc;
   height: 100vh;
-}
-
-.user-profile-image {
-  height: 60px;
-  width: 60px;
-  border-radius: 500px;
-}
-
-.username {
-  color: #8a8a8a;
-}
-
-/* USER TABLES */
-thead,
-tbody {
-  display: block;
-}
-
-tbody {
-  height: 650px;
   overflow-y: auto;
-  overflow-x: hidden;
 }
 
-td {
-  width: 1900px;
+/* USER PROFILE IMAGE */
+.user-profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e3e6f0;
+}
+
+/* SEARCH BAR */
+.search-bar .form-control {
+  border-radius: 0.35rem 0 0 0.35rem;
+}
+
+.search-bar .btn {
+  border-radius: 0 0.35rem 0.35rem 0;
+}
+
+/* TABLE STYLES */
+.card {
+  border-radius: 0.35rem;
+  border: none;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--text-color);
+  padding: 1rem;
+}
+
+.table tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* BUTTONS */
+.btn-outline-danger {
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.button-search {
+  background-color: #007377 !important;
+  color: white !important;
+}
+
+/* Change Password Form Styles */
+.change-password-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.change-password-form .form-label {
+    font-weight: 500;
+}
+
+.change-password-form .btn {
+    padding: 0.5rem 1.5rem;
+}
+
+/* Alert Messages */
+.alert {
+    border-radius: 0.35rem;
+    margin-bottom: 1.5rem;
 }
