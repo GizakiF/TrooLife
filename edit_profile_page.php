@@ -93,15 +93,7 @@ $user = $_SESSION['user'];
                 <div class="row mb-3">
                   <div class="col-sm-4 fw-bold">Username:</div>
                   <div class="col-sm-8">
-                    <div class="col-auto">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="username"
-                        value="<?= htmlspecialchars($user['username']) ?>"
-                        name="username"
-                      />
-                    </div>
+                    <?= htmlspecialchars($user['username']) ?>
                   </div>
                 </div>
                 <div class="row mb-3">

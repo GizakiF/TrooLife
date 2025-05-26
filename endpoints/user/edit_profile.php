@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $conn = require('../connection.php');
 
 $fname = isset($_POST['fname']) ? $_POST['fname'] : null;
@@ -31,6 +33,7 @@ try {
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
     $_SESSION['user'] = $user;
+    header("Location: ../../profile_page.php");
 
 
 
