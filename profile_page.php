@@ -13,6 +13,7 @@ $user = $_SESSION['user'];
     <link rel="stylesheet" href="css/global_styles.css" />
     <link rel="stylesheet" href="css/buttons.css" />
     <link rel="stylesheet" href="css/login_page.css" />
+    <link rel="stylesheet" href="css/profile.css" />
     <link rel="stylesheet" href="css/styles.css" />
 
     <!-- bs5 css -->
@@ -27,7 +28,6 @@ $user = $_SESSION['user'];
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
-    <link rel="stylesheet" href="css/profile_page.css" />
   </head>
   <body class="d-flex flex-column min-vh-100">
     <!-- header -->
@@ -54,10 +54,12 @@ $user = $_SESSION['user'];
 
             <!-- Right Column -->
             <div class="col-12 col-md-8 p-4">
-              <h3 class="mb-4">Profile Information</h3>
-              <a href="edit_profile_page.php"
-                >l<span class="glyphicon glyphicon-pencil"></span
-              ></a>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="mb-0">Profile Information</h3>
+                <a href="edit_profile_page.php" class="edit-button">
+                  <i class="bi bi-pencil-square"></i> Edit
+                </a>
+              </div>
 
               <hr />
               <div class="row mb-3">

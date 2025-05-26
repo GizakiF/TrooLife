@@ -1,0 +1,16 @@
+:root {
+  /* colors */
+  --blue-green-color: #007377;
+  --yellow-color: #f6dba0;
+
+  /* fonts */
+  --primary-font: "Manrope", sans-serif;
+  --header-font: "Poppins", sans-serif;
+
+  /* breakpoints */
+  --sm: 576px;
+  --md: 768px;
+  --lg: 992px;
+  --xl: 1200px;
+  --xxl: 1400px;
+}
