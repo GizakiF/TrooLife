@@ -77,7 +77,7 @@ try {
                 </thead>
                 <tbody>
                   <?php foreach ($users as $user): ?>
-                  <tr>
+                  <tr class="user-row <?php echo $user['is_active'] ? '' : 'inactive'; ?>">
                     <td>
                       <div class="d-flex align-items-center">
                         <img
@@ -147,52 +147,52 @@ try {
     <script>
       const rowsPerPage = 6;
       let currentPage = 1;
+      let allRows = [];
 
-      function paginateTable() {
-        const table = document.getElementById("userTable");
-        const rows = table.querySelectorAll("tbody tr");
-        const totalPages = Math.ceil(rows.length / rowsPerPage);
+        function paginateTable(filteredRows = null) {
+          const rows = filteredRows || allRows;
+          const totalPages = Math.ceil(rows.length / rowsPerPage);
 
-        rows.forEach((row, index) => {
-          row.style.display = (index >= (currentPage - 1) * rowsPerPage && index < currentPage * rowsPerPage) ? "" : "none";
-        });
+          rows.forEach((row, index) => {
+            row.style.display = (index >= (currentPage - 1) * rowsPerPage && index < currentPage * rowsPerPage) ? "" : "none";
+          });
 
-        renderPaginationControls(totalPages);
-      }
-
-      function renderPaginationControls(totalPages) {
-        const container = document.getElementById("pagination-controls");
-        container.innerHTML = "";
-
-        for (let i = 1; i <= totalPages; i++) {
-          const btn = document.createElement("button");
-          btn.textContent = i;
-          btn.className = `btn btn-sm mx-1 ${i === currentPage ? 'btn-primary' : 'btn-outline-primary'}`;
-          btn.onclick = () => {
-            currentPage = i;
-            paginateTable();
-          };
-          container.appendChild(btn);
+          renderPaginationControls(totalPages, rows);
         }
-      }
 
-      document.addEventListener("DOMContentLoaded", () => {
-        paginateTable();
-      });
+        function renderPaginationControls(totalPages, visibleRows) {
+          const container = document.getElementById("pagination-controls");
+          container.innerHTML = "";
+
+          for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement("button");
+            btn.textContent = i;
+            btn.className = `btn btn-sm mx-1 ${i === currentPage ? 'btn-primary' : 'btn-outline-primary'}`;
+            btn.onclick = () => {
+              currentPage = i;
+              paginateTable(visibleRows);
+            };
+            container.appendChild(btn);
+          }
+        }
 
       function searchUsers() {
         const input = document.getElementById("searchInput");
         const filter = input.value.toLowerCase();
-        const rows = document.querySelectorAll("#userTable tbody tr");
+        const all = Array.from(document.querySelectorAll("#userTable tbody tr"));
 
-        rows.forEach((row) => {
-          row.style.display = row.textContent.toLowerCase().includes(filter) ? "" : "none";
-        });
+        const filtered = all.filter(row => row.textContent.toLowerCase().includes(filter));
 
-        // Reset pagination after filtering
+        all.forEach(row => row.style.display = "none");
+
         currentPage = 1;
-        paginateTable();
+        paginateTable(filtered);
       }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        allRows = Array.from(document.querySelectorAll("#userTable tbody tr"));
+        paginateTable();
+      });
     </script>
 
     <!-- ajax -->
@@ -217,15 +217,17 @@ try {
 
               if (result.success) {
                 // alert(result.message);
-                // location.reload(); // You can make this smoother by toggling button state instead
+                const row = button.closest("tr");
                 if (result.new_status === 1) {
                   button.textContent = "Deactivate";
                   button.classList.remove("btn-outline-success");
                   button.classList.add("btn-outline-danger");
+                  row.classList.remove("inactive");
                 } else {
                   button.textContent = "Activate";
                   button.classList.remove("btn-outline-danger");
                   button.classList.add("btn-outline-success");
+                  row.classList.add("inactive");
                 }
               } else {
                 alert(result.message || "Something went wrong.");
