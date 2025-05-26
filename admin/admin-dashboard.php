@@ -6,7 +6,7 @@ $conn = require("../endpoints/connection.php");
 $users = [];
 
 try {
-    $stmt = $conn->prepare(" SELECT * FROM Users; ");
+    $stmt = $conn->prepare("SELECT * FROM Users;");
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
@@ -16,7 +16,6 @@ try {
     error_log($e);
 }
 ?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,88 +26,118 @@ try {
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <title>Admin Dashboard</title>
   </head>
   <body>
-    <!-- end of admin user panel -->
     <div class="container-fluid px-0">
       <div class="row g-0">
         <!-- navigation pane -->
-        <div class="col-md-2 admin-navigation-pane p-4"><h2>TrooLife</h2><hr/></div>
-        <!-- end of navigation pane -->
+        <?php require("./admin-navigation-pane.php")?>
+
         <!-- dashboard -->
-        <div class="col-md-10 admin-dashboard">
+        <div class="col-md-10 admin-dashboard p-4">
           <!-- admin user panel -->
-          <div
-            class="container-fluid admin-user-panel d-flex justify-content-between align-items-center p-2"
-          >
-            <h3 class="text-light">Hello, <?php echo htmlspecialchars($admin_user['first_name']); ?></h3>
-            <a href="" class="text-light">Logout</a>
+          <div class="container-fluid admin-user-panel d-flex justify-content-between align-items-center mb-4">
+            <h3>Users</h3>
+            <div>
+              <span class="me-3">Hello, <?php echo htmlspecialchars($admin_user['first_name']); ?></span>
+              <a href="logout.php" class="btn btn-outline-secondary btn-sm">Logout</a>
+            </div>
           </div>
-          <h1 class="p-2">Dashboard</h1>
-          <!-- card section; user count, active users -->
-          <div class="card-section"></div>
-          <!-- table section -->
-          <div class="table-section px-3">
-            <table class="table table-striped">
-              <thead>
-                Users
-                <!-- <tr> -->
-                <!--   <?php if (!empty($users)): ?> <?php foreach (array_keys($users[0]) as $column): ?> -->
-                <!--   <th><?php echo htmlspecialchars($column); ?></th> -->
-                <!--   <?php endforeach; ?> <?php else: ?> -->
-                <!--   <th>No users found</th> -->
-                <!--   <?php endif; ?> -->
-                <!-- </tr> -->
-              </thead>
-              <tbody>
-                <!-- <?php foreach ($users as $user): ?> -->
-                <tr>
-                  <td>
-                    <!-- <div class="row align-items-center"> -->
-                    <!--   <div class="col-md-9"> -->
-                      <div class="d-flex">
+
+          <!-- Search Bar -->
+          <div class="search-bar mb-4">
+            <div class="input-group">
+              <input
+                type="text"
+                id="searchInput"
+                onkeyup="searchUsers()"
+                class="form-control"
+                placeholder="Search for users..."
+              />
+              <button class="btn button-search" type="button">
+                <i class="bi bi-search"></i> Search
+              </button>
+            </div>
+          </div>
+
+          <!-- User Table -->
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+              <table class="table table-hover align-middle mb-0" id="userTable">
+                <thead class="table-light">
+                  <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Date Joined</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($users as $user): ?>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
                         <img
                           src="../<?php echo htmlspecialchars($user['profile_image_path']); ?>"
                           alt=""
-                          class="user-profile-image"
+                          class="user-profile-image me-3"
                         />
-                        <div class="d-flex flex-column p-2">
-                          <div class="d-flex justify-content-center">
-                            <span
-                              ><?php echo htmlspecialchars($user["last_name"]); ?>, <?php echo htmlspecialchars($user["first_name"]); ?>
-                            </span>
-                          </div>
-                          <span class="username">@<?php echo htmlspecialchars($user['username']); ?></span>
+                        <div>
+                          <strong><?php echo htmlspecialchars($user["first_name"] . " " . $user["last_name"]); ?></strong>
                         </div>
                       </div>
-                      <!-- </div> -->
-                      <!-- <div class="col-md-3"></div> -->
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                    <td><?php echo htmlspecialchars($user['email']); ?></td>
+                    <td>@<?php echo htmlspecialchars($user['username']); ?></td>
+                    <td><?php echo htmlspecialchars($user['date_created']); ?></td>
+                    <td>
+                      <form method="POST" action="../endpoints/admin/update_user_status.php">
+                        <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user['user_id']); ?>" />
+                        <?php if ($user['is_active']): ?>
+                          <button type="submit" class="btn btn-sm btn-outline-danger">Deactivate</button>
+                        <?php else: ?>
+                          <button type="submit" class="btn btn-sm btn-outline-success">Activate</button>
+                        <?php endif; ?>
+                      </form>
+                    </td>
+                  </tr>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
 
-                <!-- <?php endforeach; ?> -->
-                <!-- <?php foreach ($users as $user): ?> -->
-                <!-- <tr> -->
-                <!--   <?php foreach ($user as $value): ?> -->
-                <!--   <td><?php echo htmlspecialchars($value); ?></td> -->
-                <!--   <?php endforeach; ?> -->
-                <!-- </tr> -->
-                <!-- <?php endforeach; ?> -->
-
-              </tbody>
-            </table>
+              <?php if (empty($users)): ?>
+              <div class="p-4 text-center text-muted">No users found.</div>
+              <?php endif; ?>
+            </div>
           </div>
         </div>
-        <!-- end of dashboard -->
       </div>
     </div>
-    <!-- bs5 script -->
+
+    <!-- Bootstrap 5 -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+    <!-- Search Script -->
+    <script>
+      function searchUsers() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toLowerCase();
+        const rows = document.querySelectorAll("#userTable tbody tr");
+
+        rows.forEach((row) => {
+          const text = row.textContent.toLowerCase();
+          row.style.display = text.includes(filter) ? "" : "none";
+        });
+      }
+    </script>
   </body>
 </html>

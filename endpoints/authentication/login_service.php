@@ -1,6 +1,6 @@
 <?php
 
-
+session_start();
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
@@ -16,16 +16,17 @@ $email = isset($_POST['email']) ? trim($_POST['email']) : null;
 $password = isset($_POST['password']) ? $_POST['password'] : null;
 
 if (!$email || !$password) {
-    echo json_encode(["success" => false, "message" => "Missing email or password"]);
+    $_SESSION['login_errors'] = ["Missing email or password"];
+    header("Location: ../../login_page.php");
     exit();
 }
 
 $sql = "SELECT * FROM Users WHERE email = ?";
-
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
-    echo json_encode(["success" => false, "message" => "Failed to prepare statement"]);
+    $_SESSION['login_errors'] = ["Server error. Please try again later."];
+    header("Location: ../../login_page.php");
     exit();
 }
 
@@ -34,25 +35,19 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-if (!$user) {
-    echo json_encode(["success" => false, "message" => "Invalid email or password"]);
+if (!$user || $password !== $user['password']) {
+    $_SESSION['login_errors'] = ["Invalid email or password"];
+    header("Location: ../../login_page.php");
     exit();
 }
 
-if ($password !== $user['password']) {
-    echo json_encode(["success" => false, "message" => "Invalid email or password"]);
+if ($user['is_active'] == 0) {
+    $_SESSION['login_errors'] = ["Your account is not yet activated. Please contact support."];
+    header("Location: ../../login_page.php");
     exit();
 }
 
-// unset($user['password']);
-
-echo json_encode(["success" => true, "message" => "Login successful", "user" => $user]);
-
-
+// Login success
 $_SESSION['user'] = $user;
-print_r($_SESSION['user']);
-header('Location: ../../index.php');
+header("Location: ../../index.php");
 exit();
-
-?>
-

@@ -12,23 +12,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // Insert into DB
-    $sql = "INSERT INTO users (first_name, last_name, username, email, password, date_of_birth, gender, profile_image_path, role_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-    $stmt = $conn->prepare($sql);
-    $roleId = 2;
-    $stmt->bind_param("ssssssss", $fname, $lname, $username, $email, $password, $birthday, $gender, $imagePath, $roleId);
-
-    if ($stmt->execute()) {
-        echo "Account created successfully!";
-        // Redirect or show success message
-    } else {
-        echo "Error: " . $stmt->error;
-    }
-
-    $stmt->close();
-    $conn->close();
+    // // Insert into DB
+    // $sql = "INSERT INTO Users (first_name, last_name, username, email, password, date_of_birth, gender, profile_image_path, role_id)
+    //         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // $stmt = $conn->prepare($sql);
+    // $roleId = 2;
+    // $stmt->bind_param("ssssssssi", $fname, $lname, $username, $email, $password, $birthday, $gender, $imagePath, $roleId);
+    //
+    // if ($stmt->execute()) {
+    //     echo "Account created successfully!";
+    //     // Redirect or show success message
+    // } else {
+    //     echo "Error: " . $stmt->error;
+    // }
+    //
+    // $stmt->close();
+    // $conn->close();
     // Sanitize input
     $username = htmlspecialchars($_POST['username']);
     $email = htmlspecialchars($_POST['email']);
@@ -73,12 +72,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $conn->prepare("INSERT INTO Users (
     first_name, last_name, username,
     email, date_of_birth, gender,
-    profile_image_path, role_id, password, date_created) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+    profile_image_path, role_id, password, date_created, is_active) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
     $roleId = 2;
+    $isActive = 1;
     $now = date("Y-m-d H:i:s");
-    $stmt->bind_param("sssssssiss", $fname, $lname, $username, $email, $birthday, $gender, $imagePath, $roleId, $password, $now);
+    $stmt->bind_param("sssssssissi", $fname, $lname, $username, $email, $birthday, $gender, $imagePath, $roleId, $password, $now, $isActive);
     $stmt->execute();
 
     $_SESSION['users'][] = $newUser;

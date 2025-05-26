@@ -23,7 +23,7 @@
     </button>
 
     <!-- navbar brand, title -->
-    <a href="" class="navbar-brand"
+    <a href="index.php" class="navbar-brand"
       ><img src="assets/images/troolife logo 1.svg" alt=""
     /></a>
 
