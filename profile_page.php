@@ -16,6 +16,7 @@ $user = $_SESSION['user'];
     <link rel="stylesheet" href="css/profile.css" />
     <link rel="stylesheet" href="css/styles.css" />
 
+
     <!-- bs5 css -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -39,13 +40,13 @@ $user = $_SESSION['user'];
         <div class="card shadow-sm w-100">
           <div class="row g-0 flex-column flex-md-row">
             <!-- Left Column -->
-            <div
-              class="col-12 col-md-4 text-center p-4 border-end border-md-end-0 border-bottom border-md-bottom-0"
-            >
+            <div class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center text-center p-4 border-end border-md-end-0 border-bottom border-md-bottom-0">
               <img
+                id="profileImagePreview"
                 src="<?= htmlspecialchars($user['profile_image_path']) ?>"
                 class="img-fluid rounded-circle mb-3 profile-image"
                 alt="Profile Picture"
+                style="max-width: 200px; height: auto;"
               />
               <h4><?= htmlspecialchars($user['first_name']) ?></h4>
               <h5 class="text-muted"></h5>

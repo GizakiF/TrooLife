@@ -15,6 +15,7 @@ $user = $_SESSION['user'];
     <link rel="stylesheet" href="css/login_page.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/profile.css" />
+    <link rel="stylesheet" href="css/edit-profile.css" />
 
     <!-- bs5 css -->
     <link
@@ -62,7 +63,7 @@ $user = $_SESSION['user'];
                 <button
                   type="button"
                   id="changeImageButton"
-                  class="btn btn-outline-primary"
+                  class="change-image-button"
                 >
                   Change Profile Image
                 </button>
