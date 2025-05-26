@@ -156,3 +156,31 @@ body {
   opacity: 1;
   color: inherit;
 }
+
+/* pagination controls  */
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #005f59 !important; /* slightly darker shade */
+  border-color: #005f59 !important;
+  color: white !important;
+}
+
+/* Outline buttons with your primary color */
+.btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border-color: var(--primary-color) !important;
+}
