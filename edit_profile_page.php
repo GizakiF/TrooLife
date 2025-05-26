@@ -138,9 +138,9 @@ $user = $_SESSION['user'];
                       <input
                         type="date"
                         class="form-control"
-                        id="birthday"
+                        id="date_of_birth"
                         value="<?= htmlspecialchars($user['date_of_birth']) ?>"
-                        name="birthday"
+                        name="date_of_birth"
                       />
                     </div>
                   </div>

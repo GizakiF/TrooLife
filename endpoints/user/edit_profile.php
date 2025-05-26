@@ -7,7 +7,7 @@ $conn = require('../connection.php');
 $fname = isset($_POST['fname']) ? $_POST['fname'] : null;
 $lname = isset($_POST['lname']) ? $_POST['lname'] : null;
 $email = isset($_POST['email']) ? trim($_POST['email']) : null;
-$username = isset($_POST['username']) ? $_POST['username'] : null;
+// $username = isset($_POST['username']) ? $_POST['username'] : null;
 $birthday = isset($_POST['date_of_birth']) ? $_POST['date_of_birth'] : null;
 $gender = isset($_POST['gender']) ? $_POST['gender'] : null;
 $password = isset($_POST['password']) ? $_POST['password'] : null;
@@ -17,11 +17,11 @@ try {
     $stmt = $conn->prepare("
     UPDATE Users
     SET first_name = ?, last_name = ?,
-    email = ?, username = ?,
-    date_of_birth = ?, gender = ?, password = ?
+    email = ?, date_of_birth = ?,
+    gender = ?, password = ?
     WHERE user_id = ?;
     ");
-    $stmt->bind_param("sssssssi", $fname, $lname, $email, $username, $birthday, $gender, $password, $userId);
+    $stmt->bind_param("ssssssi", $fname, $lname, $email, $birthday, $gender, $password, $userId);
     $stmt->execute();
 
     $stmt = $conn->prepare("
