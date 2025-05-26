@@ -37,20 +37,39 @@ $user = $_SESSION['user'];
     <div class="profile-container">
       <div class="container my-5 flex-grow-1 d-flex align-items-center">
         <div class="card shadow-sm w-100">
-          <form action="./endpoints/user/edit_profile.php" method="post">
+          <form action="./endpoints/user/edit_profile.php" method="post" enctype="multipart/form-data">
             <div class="row g-0 flex-column flex-md-row">
               <!-- Left Column -->
-              <div
-                class="col-12 col-md-4 text-center p-4 border-end border-md-end-0 border-bottom border-md-bottom-0"
-              >
+              <div class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center text-center p-4 border-end border-md-end-0 border-bottom border-md-bottom-0">
                 <img
+                  id="profileImagePreview"
                   src="<?= htmlspecialchars($user['profile_image_path']) ?>"
                   class="img-fluid rounded-circle mb-3 profile-image"
                   alt="Profile Picture"
+                  style="max-width: 200px; height: auto;"
                 />
-                <h4><?= htmlspecialchars($user['first_name']) ?></h4>
-                <h5 class="text-muted"></h5>
-                <?= htmlspecialchars($user['last_name']) ?>
+
+                <!-- Hidden file input -->
+                <input
+                  type="file"
+                  id="profile_image"
+                  name="profile_image"
+                  accept="image/*"
+                  style="display: none;"
+                />
+
+                <!-- Button to trigger file input -->
+                <button
+                  type="button"
+                  id="changeImageButton"
+                  class="btn btn-outline-primary"
+                >
+                  Change Profile Image
+                </button>
+
+                <!-- <h4><?= htmlspecialchars($user['first_name']) ?></h4> -->
+                <!-- <h5 class="text-muted"></h5> -->
+                <!-- <?= htmlspecialchars($user['last_name']) ?> -->
               </div>
 
               <!-- Right Column -->
@@ -187,12 +206,20 @@ $user = $_SESSION['user'];
                       </div>
                     </div>
 
-                    <button
-                      type="submit"
-                      class="btn btn-primary w-100 submit-button mt-5"
-                    >
-                      Save Changes
-                    </button>
+                    <div class="d-flex mt-5">
+                      <a
+                        href="profile_page.php"
+                        class="btn btn-outline-secondary me-2 w-50"
+                      >
+                        Cancel
+                      </a>
+                      <button
+                        type="submit"
+                        class="btn btn-primary submit-button w-50"
+                      >
+                        Save Changes
+                      </button>
+                    </div>
                     <!-- <?= htmlspecialchars($user['gender']) ?> -->
                   </div>
                 </div>
@@ -214,5 +241,26 @@ $user = $_SESSION['user'];
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      const changeImageButton = document.getElementById('changeImageButton');
+      const profileImageInput = document.getElementById('profile_image');
+      const profileImagePreview = document.getElementById('profileImagePreview');
+
+      changeImageButton.addEventListener('click', () => {
+        profileImageInput.click(); // Trigger file select dialog
+      });
+
+      profileImageInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          profileImagePreview.src = e.target.result; // Update preview image src
+        };
+        reader.readAsDataURL(file);
+      });
+    </script>
   </body>
 </html>
