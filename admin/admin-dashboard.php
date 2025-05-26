@@ -94,7 +94,7 @@ try {
                     <td>@<?php echo htmlspecialchars($user['username']); ?></td>
                     <td><?php echo htmlspecialchars($user['date_created']); ?></td>
                     <td>
-                      <form method="POST" action="../endpoints/admin/update_user_status.php">
+                      <form class="status-form" data-user-id="<?php echo htmlspecialchars($user['user_id']); ?>">
                         <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user['user_id']); ?>" />
                         <?php if ($user['is_active']): ?>
                           <button type="submit" class="btn btn-sm btn-outline-danger">Deactivate</button>
@@ -107,6 +107,9 @@ try {
                   <?php endforeach; ?>
                 </tbody>
               </table>
+
+              <!-- pagination control -->
+              <div id="pagination-controls" class="d-flex justify-content-center my-3"></div>
 
               <?php if (empty($users)): ?>
               <div class="p-4 text-center text-muted">No users found.</div>
@@ -139,5 +142,101 @@ try {
         });
       }
     </script>
+
+    <!-- pagination -->
+    <script>
+      const rowsPerPage = 6;
+      let currentPage = 1;
+
+      function paginateTable() {
+        const table = document.getElementById("userTable");
+        const rows = table.querySelectorAll("tbody tr");
+        const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+        rows.forEach((row, index) => {
+          row.style.display = (index >= (currentPage - 1) * rowsPerPage && index < currentPage * rowsPerPage) ? "" : "none";
+        });
+
+        renderPaginationControls(totalPages);
+      }
+
+      function renderPaginationControls(totalPages) {
+        const container = document.getElementById("pagination-controls");
+        container.innerHTML = "";
+
+        for (let i = 1; i <= totalPages; i++) {
+          const btn = document.createElement("button");
+          btn.textContent = i;
+          btn.className = `btn btn-sm mx-1 ${i === currentPage ? 'btn-primary' : 'btn-outline-primary'}`;
+          btn.onclick = () => {
+            currentPage = i;
+            paginateTable();
+          };
+          container.appendChild(btn);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        paginateTable();
+      });
+
+      function searchUsers() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toLowerCase();
+        const rows = document.querySelectorAll("#userTable tbody tr");
+
+        rows.forEach((row) => {
+          row.style.display = row.textContent.toLowerCase().includes(filter) ? "" : "none";
+        });
+
+        // Reset pagination after filtering
+        currentPage = 1;
+        paginateTable();
+      }
+    </script>
+
+    <!-- ajax -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".status-form").forEach((form) => {
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const button = form.querySelector("button[type='submit']");
+            const userId = form.dataset.userId;
+
+            const formData = new FormData();
+            formData.append("user_id", userId);
+
+            try {
+              const response = await fetch("../endpoints/admin/update_user_status.php", {
+                method: "POST",
+                body: formData,
+              });
+
+              const result = await response.json();
+
+              if (result.success) {
+                // alert(result.message);
+                // location.reload(); // You can make this smoother by toggling button state instead
+                if (result.new_status === 1) {
+                  button.textContent = "Deactivate";
+                  button.classList.remove("btn-outline-success");
+                  button.classList.add("btn-outline-danger");
+                } else {
+                  button.textContent = "Activate";
+                  button.classList.remove("btn-outline-danger");
+                  button.classList.add("btn-outline-success");
+                }
+              } else {
+                alert(result.message || "Something went wrong.");
+              }
+            } catch (error) {
+              alert("Error updating user status.");
+            }
+          });
+        });
+      });
+    </script>
+
   </body>
 </html>

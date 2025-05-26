@@ -1,5 +1,8 @@
 <?php
+
+header("Content-Type: application/json");
 session_start();
+
 $conn = require("../connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['user_id'])) {
@@ -16,11 +19,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['user_id'])) {
 
         $updateStmt = $conn->prepare("UPDATE Users SET is_active = ? WHERE user_id = ?");
         $updateStmt->bind_param("ii", $new_status, $user_id);
-        $updateStmt->execute();
+        $success = $updateStmt->execute();
 
-        header("Location: ../../admin/admin-dashboard.php");
-        exit();
+        if ($success) {
+            echo json_encode([
+                "success" => true,
+                "message" => "User status updated successfully.",
+                "new_status" => $new_status
+            ]);
+        } else {
+            echo json_encode([
+                "success" => false,
+                "message" => "Failed to update user status."
+            ]);
+        }
+    } else {
+        echo json_encode([
+            "success" => false,
+            "message" => "User not found."
+        ]);
     }
+} else {
+    echo json_encode([
+        "success" => false,
+        "message" => "Invalid request."
+    ]);
 }
-?>
-
