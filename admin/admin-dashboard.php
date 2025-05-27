@@ -145,7 +145,7 @@ try {
 
     <!-- pagination -->
     <script>
-      const rowsPerPage = 6;
+      const rowsPerPage = 7;
       let currentPage = 1;
       let allRows = [];
 

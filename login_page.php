@@ -93,12 +93,12 @@ unset($_SESSION['login_errors']);
             <!-- </div> -->
             <div class="mb-5 mt-5" style="color:white;">.</div>
 
-            <div class="mt-5 mb-3 text-center">
+            <div class="mt-5 text-center">
               Don't Have an Account?
               <a class="register-here" href="register.php">Register here!</a>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 submit-button">
+            <button type="submit" class="mt-3 btn btn-primary w-100 submit-button">
               Submit
             </button>
           </form>
@@ -120,6 +120,9 @@ unset($_SESSION['login_errors']);
             "The purpose of our lives is to be happy."
             <footer class="quote-author">- Dalai Lama</footer>
           </blockquote>
+          <div class="mb-3 text-center">
+            <a class="register-here" href="./admin/admin-login-page.php">Admin Login Portal</a>
+          </div>
         </div>
       </div>
     </div>

@@ -1,3 +1,9 @@
+<?php
+session_start();
+$errors = $_SESSION['login_errors'] ?? [];
+unset($_SESSION['login_errors']);
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,13 +22,22 @@
     />
     <title>Admin Login Page</title>
   </head>
-  <body>
+  <body class="body-bg">
     <div class="container-fluid">
       <div class="d-flex justify-content-center align-items-center min-vh-100">
         <div class="card shadow admin-login-card">
           <img src="../assets/images/nature.jpg" alt="" class="card-img-top" />
           <div class="card-body admin-login-card-body">
             <div class="card-title fw-bold fs-2 mb-3">Login</div>
+            <?php if (!empty($errors)): ?>
+              <div class="alert alert-danger">
+                <ul class="mb-0">
+                  <?php foreach ($errors as $error): ?>
+                    <li><?= htmlspecialchars($error) ?></li>
+                  <?php endforeach; ?>
+                </ul>
+              </div>
+            <?php endif; ?>
             <!-- login form -->
             <form
               class="admin-login-form"

@@ -1,12 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Allow-Headers: Content-Type");
-header('Content-Type: application/json');
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+session_start();
 
 $conn = require('../connection.php');
 
@@ -14,16 +8,17 @@ $email = isset($_POST['admin-email']) ? trim($_POST['admin-email']) : null;
 $password = isset($_POST['admin-password']) ? $_POST['admin-password'] : null;
 
 if (!$email || !$password) {
-    echo json_encode(["success" => false, "message" => "Missing email or password"]);
+    $_SESSION['login_errors'] = ['Missing email or password'];
+    header('Location: ../../admin/admin-login-page.php');
     exit();
 }
 
 $sql = "SELECT * FROM Admins WHERE email = ?";
-
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
-    echo json_encode(["success" => false, "message" => "Failed to prepare statement"]);
+    $_SESSION['login_errors'] = ['Failed to prepare statement'];
+    header('Location: ../../admin/admin-login-page.php');
     exit();
 }
 
@@ -32,24 +27,14 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-if (!$user) {
-    echo json_encode(["success" => false, "message" => "Invalid email or password"]);
-    exit();
-}
-
-if (!password_verify($password, $user['password'])) {
-    echo json_encode(["success" => false, "message" => "Invalid email or password"]);
+if (!$user || !password_verify($password, $user['password'])) {
+    $_SESSION['login_errors'] = ['Invalid email or password'];
+    header('Location: ../../admin/admin-login-page.php');
     exit();
 }
 
 // unset($user['password']);
 
-echo json_encode(["success" => true, "message" => "Login successful", "user" => $user]);
-
-
 $_SESSION['admin_user'] = $user;
-print_r($_SESSION['admin_user']);
 header('Location: ../../admin/admin-dashboard.php');
 exit();
-
-
