@@ -2,7 +2,6 @@
 session_start();
 $conn = require("../endpoints/connection.php");
 
-// Check if admin is logged in
 if (!isset($_SESSION['admin_user'])) {
     header("Location: admin-login-page.php");
     exit();
@@ -20,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $role_id = 1;
 
-    // Basic validation
     if (empty($first_name) || empty($last_name) || empty($username) || empty($email) || empty($password)) {
         $error = "All fields are required.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -28,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strlen($password) < 8) {
         $error = "Password must be at least 8 characters.";
     } else {
-        // Check if username or email already exists
-        $stmt = $conn->prepare("SELECT * FROM Admins WHERE username = ? OR email = ?");
+        // usename exists?
+        $stmt = $conn->prepare("SELECT * FROM admins WHERE username = ? OR email = ?");
         $stmt->bind_param("ss", $username, $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -41,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $created_at = date("Y-m-d H:i:s");
             $is_active = 1;
 
-            $insert_stmt = $conn->prepare("INSERT INTO Admins (first_name, last_name, username, email, password, date_created, is_active, role_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert_stmt = $conn->prepare("INSERT INTO admins (first_name, last_name, username, email, password, date_created, is_active, role_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             $insert_stmt->bind_param("ssssssii", $first_name, $last_name, $username, $email, $hashed_password, $created_at, $is_active, $role_id);
 
             if ($insert_stmt->execute()) {

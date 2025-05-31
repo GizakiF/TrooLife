@@ -6,7 +6,7 @@ $conn = require("../endpoints/connection.php");
 $users = [];
 
 try {
-    $stmt = $conn->prepare("SELECT * FROM Users;");
+    $stmt = $conn->prepare("SELECT * FROM users;");
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {

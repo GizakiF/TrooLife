@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['user_id'])) {
     if ($user) {
         $new_status = $user['is_active'] == 1 ? 0 : 1;
 
-        $updateStmt = $conn->prepare("UPDATE Users SET is_active = ? WHERE user_id = ?");
+        $updateStmt = $conn->prepare("UPDATE users SET is_active = ? WHERE user_id = ?");
         $updateStmt->bind_param("ii", $new_status, $user_id);
         $success = $updateStmt->execute();
 

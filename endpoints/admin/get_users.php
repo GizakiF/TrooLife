@@ -6,7 +6,7 @@ $conn = require("../connection.php");
 
 try {
     $stmt = $conn->prepare("
-    SELECT * FROM Users;
+    SELECT * FROM users;
     ");
     $stmt->execute();
     $result = $stmt->get_result();

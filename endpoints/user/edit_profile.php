@@ -41,14 +41,14 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPL
 try {
     if ($profileImagePath) {
         $stmt = $conn->prepare("
-            UPDATE Users
+            UPDATE users
             SET first_name = ?, last_name = ?, email = ?, date_of_birth = ?, gender = ?, password = ?, profile_image_path = ?
             WHERE user_id = ?;
         ");
         $stmt->bind_param("sssssssi", $fname, $lname, $email, $birthday, $gender, $password, $profileImagePath, $userId);
     } else {
         $stmt = $conn->prepare("
-            UPDATE Users
+            UPDATE users
             SET first_name = ?, last_name = ?, email = ?, date_of_birth = ?, gender = ?, password = ?
             WHERE user_id = ?;
         ");
@@ -57,7 +57,7 @@ try {
 
     $stmt->execute();
 
-    $stmt = $conn->prepare("SELECT * FROM Users WHERE user_id = ?;");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = ?;");
     $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();

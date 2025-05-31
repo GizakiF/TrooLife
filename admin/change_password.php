@@ -2,7 +2,6 @@
 session_start();
 require_once("../endpoints/connection.php");
 
-// Check if admin is logged in
 if (!isset($_SESSION['admin_user'])) {
     header("Location: login.php");
     exit();
@@ -17,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_password = $_POST['new_password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
-    // Validate inputs
     if (empty($current_password) || empty($new_password) || empty($confirm_password)) {
         $error = "All fields are required";
     } elseif ($new_password !== $confirm_password) {
@@ -27,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Verify current password
         $conn = require("../endpoints/connection.php");
-        $stmt = $conn->prepare("SELECT password FROM Admins WHERE admin_id = ?");
+        $stmt = $conn->prepare("SELECT password FROM admins WHERE admin_id = ?");
         $stmt->bind_param("i", $admin_user['admin_id']);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -36,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($current_password, $admin['password'])) {
             // Update password
             $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $update_stmt = $conn->prepare("UPDATE Admins SET password = ? WHERE admin_id = ?");
+            $update_stmt = $conn->prepare("UPDATE admins SET password = ? WHERE admin_id = ?");
             $update_stmt->bind_param("si", $hashed_password, $admin_user['admin_id']);
 
             if ($update_stmt->execute()) {

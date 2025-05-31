@@ -13,7 +13,7 @@ if (!$email || !$password) {
     exit();
 }
 
-$sql = "SELECT * FROM Admins WHERE email = ?";
+$sql = "SELECT * FROM admins WHERE email = ?";
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
